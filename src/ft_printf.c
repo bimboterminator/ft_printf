@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/16 13:01:52 by dmesseng          #+#    #+#             */
+/*   Updated: 2021/10/16 13:02:19 by dmesseng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void	inc(t_info * info, int total)
+void	inc(t_info *info, int total)
 {
 	info->format++;
 	if (total)
@@ -33,6 +45,5 @@ int	ft_printf(const char *format, ...)
 	va_end(info->args);
 	tl = info->tl;
 	free(info);
-	return tl;
+	return (tl);
 }
-

@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_pointer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 21:43:28 by dmesseng          #+#    #+#             */
-/*   Updated: 2021/10/16 13:21:37 by dmesseng         ###   ########.fr       */
+/*   Created: 2021/10/16 11:45:20 by dmesseng          #+#    #+#             */
+/*   Updated: 2021/10/16 12:32:44 by dmesseng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_str(t_info *info)
+void	print_pointer(t_info *info)
 {
-	char	*str;
-	size_t	len;
+	size_t	ptr;
 
-	str = va_arg(info->args, char *);
-	if (str == NULL)
-	{
-		ft_putstr_fd("(null)", 1);
-		info->tl += 6;
-		return ;
-	}
-	len = ft_strlen(str);
-	ft_putstr_fd(str, 1);
-	info->tl += len;
+	ptr = (size_t)va_arg(info->args, void *);
+	ft_putstr_fd("0x", 1);
+	info->tl += putnbr_hex(ptr, 'x') + 2;
 }

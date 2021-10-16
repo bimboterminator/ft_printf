@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 21:43:28 by dmesseng          #+#    #+#             */
-/*   Updated: 2021/10/16 13:21:37 by dmesseng         ###   ########.fr       */
+/*   Created: 2021/10/08 19:47:09 by dmesseng          #+#    #+#             */
+/*   Updated: 2021/10/16 11:15:01 by dmesseng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_str(t_info *info)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*str;
-	size_t	len;
-
-	str = va_arg(info->args, char *);
-	if (str == NULL)
-	{
-		ft_putstr_fd("(null)", 1);
-		info->tl += 6;
+	if (s == NULL)
 		return ;
-	}
-	len = ft_strlen(str);
-	ft_putstr_fd(str, 1);
-	info->tl += len;
+	while (*s)
+		write(fd, s++, 1);
 }

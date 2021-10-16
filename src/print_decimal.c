@@ -1,11 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_decimal.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/16 13:05:43 by dmesseng          #+#    #+#             */
+/*   Updated: 2021/10/16 13:17:19 by dmesseng         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int ft_dlen(long d)
+int	ft_dlen(long d)
 {
-	int len = 0;
+	int	len;
+
+	len = 0;
 	if (d == 0)
 		return (1);
-	while (d!=0)
+	while (d != 0)
 	{
 		len++;
 		d /= 10;
@@ -20,7 +34,7 @@ static void	print_left_padding(int d, int len, char pad, t_info *info)
 	cnt = 0;
 	if (info->flags[plus] && d > 0)
 		putchar_and_inc('+', &cnt);
-	else if (info->flags[space] && !info->flags[plus] && d>0)
+	else if (info->flags[space] && !info->flags[plus] && d > 0)
 		putchar_and_inc(' ', &cnt);
 	if (d < 0)
 		cnt++;
@@ -30,30 +44,28 @@ static void	print_left_padding(int d, int len, char pad, t_info *info)
 		info->prc--;
 		cnt++;
 	}
-	if ((d && info->flags[point] && info->prc >= 0) || !info->flags[point]) {
+	if ((d && info->flags[point] && info->prc >= 0) || !info->flags[point])
+	{
 		ft_putnbr_fd(d, 1);
 		cnt += len;
 	}
-	while(info->wdt > cnt)
-	{
-		ft_putchar_fd(pad, 1);
-		cnt++;
-	}
+	while (info->wdt > cnt)
+		putchar_and_inc(pad, &cnt);
 	info->tl += cnt;
 }
 
-static void print_right(int d, t_info *info, int total, char pad)
+static void	print_right(int d, t_info *info, int total, char pad)
 {
 	if (info->sign && pad == '0')
 	{
 		if (d > 0 && info->flags[plus])
 			ft_putchar_fd('+', 1);
-		else if (d > 0 && info->flags[space] )
-			ft_putchar_fd(' ',1);
+		else if (d > 0 && info->flags[space])
+			ft_putchar_fd(' ', 1);
 	}
 	while (info->wdt > total)
 	{
-		ft_putchar_fd(pad,1);
+		ft_putchar_fd(pad, 1);
 		info->wdt--;
 	}
 	if (info->sign && pad == ' ')
@@ -61,26 +73,25 @@ static void print_right(int d, t_info *info, int total, char pad)
 		if (d > 0 && info->flags[plus])
 			ft_putchar_fd('+', 1);
 		else if (d > 0 && info->flags[space])
-			ft_putchar_fd(' ',1);
+			ft_putchar_fd(' ', 1);
 	}
-	while(info->numzeros--)
+	while (info->numzeros--)
 		ft_putchar_fd('0', 1);
 	if ((d && info->flags[point] && info->prc >= 0) || !info->flags[point])
 		ft_putnbr_fd(d, 1);
 }
 
-static void	print_right_padding(int d, int len, char pad, t_info* info)
+static void	print_right_padding(int d, int len, char pad, t_info *info)
 {
-	int total;
-	int numzeros;
-	int sign;
-	int cnt;
+	int	total;
+	int	numzeros;
+	int	sign;
+	int	cnt;
 
 	numzeros = 0;
 	sign = 0;
 	total = 0;
 	cnt = 0;
-
 	if (d < 0 || info->flags[plus] || info->flags[space])
 	{
 		sign = 1;
@@ -93,17 +104,18 @@ static void	print_right_padding(int d, int len, char pad, t_info* info)
 	print_right(d, info, total, pad);
 	info->tl += total;
 }
-void print_decimal(t_info * info)
+
+void	print_decimal(t_info *info)
 {
-	int d;
-	int len;
-	char pad;
-	
+	int		d;
+	int		len;
+	char	pad;
+
 	d = va_arg(info->args, int);
 	len = ft_dlen(d);
 	pad = ' ';
 	if (info->flags[zero])
-		pad ='0';
+		pad = '0';
 	if (info->flags[dash] || info->prc)
 		pad = ' ';
 	if (info->flags[dash])
