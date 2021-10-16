@@ -6,13 +6,13 @@
 /*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 20:56:27 by dmesseng          #+#    #+#             */
-/*   Updated: 2021/10/16 12:57:42 by dmesseng         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:38:13 by dmesseng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	init_flags(const char *start, t_info *info)
+static void	find_flags(const char *start, t_info *info)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ void	process_flags(t_info *info, char *str)
 	}
 	start = ft_substr(str, 0, start - str);
 	if (start)
-		init_flags(start, info);
+		find_flags(start, info);
 	else
 		remove_flags(info);
 	free(start);

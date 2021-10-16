@@ -6,7 +6,7 @@
 /*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 12:10:34 by dmesseng          #+#    #+#             */
-/*   Updated: 2021/10/16 13:01:16 by dmesseng         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:37:57 by dmesseng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ int		putnbr_hex(size_t hex, int conversion);
 void	print_hex(t_info *info);
 void	ft_putstr_fd(char *str, int fd);
 void	print_unsigned(t_info *info);
+void	clear_params(t_info *info);
+void	init_flags(t_info *info);
 #endif

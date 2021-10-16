@@ -6,7 +6,7 @@
 /*   By: dmesseng <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 12:10:53 by dmesseng          #+#    #+#             */
-/*   Updated: 2021/10/16 13:20:36 by dmesseng         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:39:24 by dmesseng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	print_conversion(t_info *info)
 		print_hex(info);
 	else if (*info->format == 'u')
 		print_unsigned(info);
+	clear_params(info);
+	init_flags(info);
 }
 
 void	print_format(t_info *info)
